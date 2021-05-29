@@ -24,4 +24,6 @@ function firstNDigits(num, n) {
     return num;
 }
 
-console.log(firstNDigits(exponential, 2));          //task4
+console.log(firstNDigits(exponential, 2));          //task4, var1
+
+console.log(String(exponential).substr(0,2));       //task4, var2
