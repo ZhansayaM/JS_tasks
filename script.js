@@ -1,30 +1,21 @@
-let money, amount1, amount2;
+let isNumber = function(num) {
+  return !isNaN(parseFloat(num)) && isFinite(num);
+};
 
-while (1) {
-  money = +prompt("Ваш месячный доход?");
-  if (!Number.isNaN(money)) break;
-}
+let money, amount, expense = [], income = "freelance", mission = 5e10;
+
+let start = function() {  //task1
+  do {
+    money = prompt("Ваш месячный доход?");
+  } while (!isNumber(money));
+};
+start();
 
 let addExpenses = prompt(
   "Перечислите возможные расходы за рассчитываемый период через запятую"
 );
 
 let deposit = confirm("Есть ли у вас депозит в банке?");
-
-let expenses1 = prompt("Введите обязательную статью расходов?");
-while (1) {
-  amount1 = +prompt("Во сколько это обойдется?");
-  if (!Number.isNaN(amount1)) break;
-}
-
-let expenses2 = prompt("Введите обязательную статью расходов?");
-while (1) {
-  amount2 = +prompt("Во сколько это обойдется?");
-  if (!Number.isNaN(amount2)) break;
-}
-
-let income = "freelance";
-let mission = 5e10;
 
 let showTypeOf = function (data) {
   console.log(data, typeof data);
@@ -33,33 +24,42 @@ let showTypeOf = function (data) {
 showTypeOf(money);
 showTypeOf(income);
 showTypeOf(deposit);
-
-// console.log(addExpenses.length);
-// console.log(
-//   "Период равен " + period + " месяцев.\nЦель заработать " + mission + " рублей"
-// );
-// addExpenses.toLowerCase();
 console.log(addExpenses.toLowerCase().split(", "));
 
 //////////////////////////////////////////////////// 
 
-function getExpensesMonth(a, b) {  //task 1, expenses
-  return a + b;
+function getExpensesMonth() {
+  let sum = 0;
+  for (let i = 0; i < 2; i++){
+    expense[i] = prompt("Введите обязательную статью расходов?");
+    do {  //task2
+      amount = prompt("Во сколько это обойдется?");
+    } while (!isNumber(amount));
+    sum += amount;
+  }
+  return sum;
 }
 
-function getAccumulatedMonth(c) {  //task2, income - expenses
-  return c - getExpensesMonth(amount1, amount2);
+let expensesAmount = getExpensesMonth();
+
+function getAccumulatedMonth(incomeAmount) {
+  return incomeAmount - expensesAmount;
 }
 
-let accumulatedMonth = getAccumulatedMonth(money); //task3
+let accumulatedMonth = getAccumulatedMonth(money);
 
-function getTargetMonth() {  //task4
+function getTargetMonth() {
   return Math.ceil(mission / accumulatedMonth);
 }
 
-console.log("Вам потребуется " + getTargetMonth() + " месяцев.");
+let period = getTargetMonth();  //task3
+if (period < 0){
+  console.log("Цель не будет достигнута");
+} else {
+  console.log("Цель будет достигнута.\nВам потребуется " + period + " месяцев.");
+}
 
-let budgetDay = Math.floor(accumulatedMonth / 30);  //task6
+let budgetDay = Math.floor(accumulatedMonth / 30);
 console.log("Ваш бюджет на день составляет " + budgetDay + " рублей.");
 
 let getStatusIncome = function (budget) {
