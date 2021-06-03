@@ -24,9 +24,9 @@ function userNumber() {
         if (confirm("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?")) userNumber();
       }
     }
-    return inner;
+    inner();
   }
   
   let getResult = userNumber();
-  getResult();
+  // getResult();
   console.dir(getResult);
