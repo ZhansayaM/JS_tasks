@@ -1,7 +1,7 @@
 //task1
 let arr = ['258369', '45678913', '123456789', '147588', '2356', '457896532', '114477'];
 for (let i = 0; i < arr.length; i++){
-    if (arr[i].substr(0, 1) === '2' || arr[i].substr(0, 1) === '4'){
+    if (arr[i][0] === '2' || arr[i][0] === '4'){
         console.log(arr[i]);
     }
 }
