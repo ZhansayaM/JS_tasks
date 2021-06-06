@@ -18,6 +18,8 @@ let appData = {
   expenses: {},
   addExpenses: [],
   deposit: false,
+  percentDeposit: 0,
+  moneyDeposit: 0,
   mission: 50000,
   budget: money,
   budgetDay: 0,
@@ -25,12 +27,27 @@ let appData = {
   expensesMonth: 0,
   period: 3,
   asking: function () {
-    let amount, expense;
-    let addExpenses = prompt(
-      "Перечислите возможные расходы за рассчитываемый период через запятую"
-    );
+    let cashIncome, itemIncome, amount, expense, addExpenses;
+
+    if (confirm('Есть ли у вас дополнительный источник заработка?')) {
+      do {
+        itemIncome = prompt('Какой у вас дополнительный заработок?');
+      } while (isNumber(itemIncome));
+      do {
+        cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?');
+      } while (!isNumber(cashIncome));
+      appData.income[itemIncome] = cashIncome;
+    }
+
+    do {
+      addExpenses = prompt(
+        "Перечислите возможные расходы за рассчитываемый период через запятую"
+      );
+    } while (isNumber(addExpenses));
     appData.addExpenses = addExpenses.toLowerCase().split(",");
+
     appData.deposit = confirm("Есть ли у вас депозит в банке?");
+
     for (let i = 0; i < 2; i++) {
       expense = prompt("Введите обязательную статью расходов?");
       do {
@@ -63,6 +80,19 @@ let appData = {
       return "Что то пошло не так";
     }
   },
+  getInfoDeposit: function(){
+    if(appData.deposit){
+      do {
+        appData.percentDeposit = propmt('Какой годовой процент?');
+      } while (!isNumber(appData.percentDeposit));
+      do {
+        appData.moneyDeposit = prompt('Какая сумма заложена?');
+      } while (!isNumber(appData.moneyDeposit));
+    }
+  },
+  calcSavedMoney: function(){
+    return appData.budgetMonth * appData.period;
+  },
 };
 
 appData.asking();
@@ -88,3 +118,10 @@ console.log("Наша программа включает в себя данны
 for (let key in appData) {
   console.log(key + "\t" + appData[key]);
 }
+
+let concatExpenses = appData.addExpenses[0];
+for (let i = 1; i < appData.addExpenses.length; i++){
+  concatExpenses = concatExpenses.concat(', ', appData.addExpenses[i]);
+  console.log(appData.addExpenses[i] + ',,,');
+}
+console.log(concatExpenses);
