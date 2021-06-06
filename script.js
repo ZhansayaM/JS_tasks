@@ -122,6 +122,5 @@ for (let key in appData) {
 let concatExpenses = appData.addExpenses[0];
 for (let i = 1; i < appData.addExpenses.length; i++){
   concatExpenses = concatExpenses.concat(', ', appData.addExpenses[i]);
-  console.log(appData.addExpenses[i] + ',,,');
 }
 console.log(concatExpenses);
