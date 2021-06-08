@@ -32,7 +32,7 @@ let appData = {
     if (confirm('Есть ли у вас дополнительный источник заработка?')) {
       do {
         itemIncome = prompt('Какой у вас дополнительный заработок?');
-      } while (isNumber(itemIncome));
+      } while (isNumber(itemIncome) || itemIncome === '');
       do {
         cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?');
       } while (!isNumber(cashIncome));
@@ -43,13 +43,15 @@ let appData = {
       addExpenses = prompt(
         "Перечислите возможные расходы за рассчитываемый период через запятую"
       );
-    } while (isNumber(addExpenses));
+    } while (isNumber(addExpenses)  || addExpenses === '');
     appData.addExpenses = addExpenses.toLowerCase().split(",");
 
     appData.deposit = confirm("Есть ли у вас депозит в банке?");
 
     for (let i = 0; i < 2; i++) {
-      expense = prompt("Введите обязательную статью расходов?");
+      do {
+        expense = prompt("Введите обязательную статью расходов?");
+      } while (isNumber(expense) || expense === '');
       do {
         amount = prompt("Во сколько это обойдется?");
       } while (!isNumber(amount));
@@ -83,7 +85,7 @@ let appData = {
   getInfoDeposit: function(){
     if(appData.deposit){
       do {
-        appData.percentDeposit = propmt('Какой годовой процент?');
+        appData.percentDeposit = prompt('Какой годовой процент?');
       } while (!isNumber(appData.percentDeposit));
       do {
         appData.moneyDeposit = prompt('Какая сумма заложена?');
@@ -96,6 +98,7 @@ let appData = {
 };
 
 appData.asking();
+appData.getInfoDeposit();
 
 appData.expensesMonth = appData.getExpensesMonth();
 console.log("Расходы за месяц: " + appData.expensesMonth);
@@ -104,6 +107,7 @@ appData.budgetMonth = appData.getBudget();
 appData.budgetDay = Math.floor(appData.budgetMonth / 30);
 
 appData.period = appData.getTargetMonth();
+let savedMoney = appData.calcSavedMoney();
 if (appData.period < 0) {
   console.log("Цель не будет достигнута");
 } else {
@@ -119,8 +123,8 @@ for (let key in appData) {
   console.log(key + "\t" + appData[key]);
 }
 
-let concatExpenses = appData.addExpenses[0];
+let concatExpenses = appData.addExpenses[0].charAt(0).toUpperCase() + appData.addExpenses[0].slice(1);
 for (let i = 1; i < appData.addExpenses.length; i++){
-  concatExpenses = concatExpenses.concat(', ', appData.addExpenses[i]);
+  concatExpenses = concatExpenses.concat(', ', appData.addExpenses[i].charAt(0).toUpperCase() + appData.addExpenses[i].slice(1));
 }
 console.log(concatExpenses);
