@@ -3,9 +3,27 @@ const plusIncome = document.getElementsByTagName('button')[0];
 const plusExpense = document.getElementsByTagName('button')[1];
 const depositCheck = document.querySelector('#deposit-check');
 const additionalIncome = document.querySelectorAll('.additional_income-item');
+
 const rightSideValues = document.querySelectorAll('[class$="-value"]');
+const rightSideValues1 = document.querySelectorAll('[class$="-value"]')[0];
+const rightSideValues2 = document.querySelectorAll('[class$="-value"]')[1];
+const rightSideValues3 = document.querySelectorAll('[class$="-value"]')[2];
+const rightSideValues4 = document.querySelectorAll('[class$="-value"]')[3];
+const rightSideValues5 = document.querySelectorAll('[class$="-value"]')[4];
+const rightSideValues6 = document.querySelectorAll('[class$="-value"]')[5];
+const rightSideValues7 = document.querySelectorAll('[class$="-value"]')[6];
+
 const allInputs = document.querySelectorAll('input');
-let inputs = [];
-for (let i = 0; i < 13; i++){
-    inputs[i] = allInputs[i];
-}
+const allInputs1 = document.querySelectorAll('input')[0];
+const allInputs2 = document.querySelectorAll('input')[1];
+const allInputs3 = document.querySelectorAll('input')[2];
+const allInputs4 = document.querySelectorAll('input')[3];
+const allInputs5 = document.querySelectorAll('input')[4];
+const allInputs6 = document.querySelectorAll('input')[5];
+const allInputs7 = document.querySelectorAll('input')[6];
+const allInputs8 = document.querySelectorAll('input')[7];
+const allInputs9 = document.querySelectorAll('input')[8];
+const allInputs10 = document.querySelectorAll('input')[9];
+const allInputs11 = document.querySelectorAll('input')[10];
+const allInputs12 = document.querySelectorAll('input')[11];
+const allInputs13 = document.querySelectorAll('input')[12];
