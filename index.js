@@ -8,5 +8,4 @@ const allInputs = document.querySelectorAll('input');
 let inputs = [];
 for (let i = 0; i < 13; i++){
     inputs[i] = allInputs[i];
-    console.log(inputs[i]);
 }
