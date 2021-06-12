@@ -10,7 +10,7 @@ book6.before(book3);
 book6.before(book4);
 book6.before(book5);
 
-document.body.style.backgroundImage = 'url(./image/url(./image/open_book.jpg))';
+document.body.style.backgroundImage = 'url(./image/you-dont-know-js.jpg)';
 
 book3.querySelector('h2 > a').textContent = 'Книга 3. this и Прототипы Объектов';
 
