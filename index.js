@@ -42,6 +42,25 @@ let depositPercent = document.querySelector(".deposit-percent");
 let targetAmount = document.querySelector(".target-amount");
 let periodSelectRange = document.querySelector(".period-select");
 let periodAmount = document.querySelector(".period-amount");
+let names = document.querySelectorAll('[placeholder="Наименование"]');
+let amounts = document.querySelectorAll('[placeholder="Сумма"]');
+let russianAlphabet = ['Ё','Й','Ц','У','К','Е','Н','Г','Ш','Щ','З','Х','Ъ','Э','Ж','Д','Л','О','Р','П','А','В','Ы','Ф','Я','Ч','С','М','И','Т','Ь','Б','Ю'];
+
+for (let i = 0; i < names.length; i++){
+    names[i].addEventListener('keypress', function(event){
+        if (event.which !== 32 && !russianAlphabet.includes(event.key.toUpperCase()) && event.key !== '.'&& event.key !== ','&& event.key !== '!' && event.key !== '.'&& event.key !== '?'&& event.key !== ':'&& event.key !== ';'&& event.key !== '-'&& event.key !== '(' && event.key !== ')'&& event.key !== '"'){
+            event.preventDefault();
+        }
+    });
+}
+
+for(let i = 0; i < amounts.length; i++){
+    amounts[i].addEventListener('keypress', function(event){
+        if (event.key !== '0' && event.key !== '1' && event.key !== '2' && event.key !== '3' && event.key !== '4' && event.key !== '5' && event.key !== '6' && event.key !== '7' && event.key !== '8' && event.key !== '9'){
+            event.preventDefault();
+        }
+    })
+}
 
 let isNumber = function (num) {
   return !isNaN(parseFloat(num)) && isFinite(num);
@@ -84,6 +103,9 @@ let appData = {
   },
   addExpensesBlock: function () {
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
+    cloneExpensesItem.querySelectorAll('input')[0].value = '';
+    cloneExpensesItem.querySelectorAll('input')[1].value = '';
+    console.log('cloneExpensesItem.value: ', cloneExpensesItem.value);
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, plusExpenseBtn);
     expensesItems = document.querySelectorAll(".expenses-items");
     if (expensesItems.length === 3) {
@@ -92,6 +114,8 @@ let appData = {
   },
   addIncomeBlock: function () {
     let cloneIncomeItem = incomeItem[0].cloneNode(true);
+    cloneIncomeItem.querySelectorAll('input')[0].value = '';
+    cloneIncomeItem.querySelectorAll('input')[1].value = '';
     incomeItem[0].parentNode.insertBefore(cloneIncomeItem, plusIncomeBtn);
     incomeItem = document.querySelectorAll(".income-items");
     if (incomeItem.length === 3) {
