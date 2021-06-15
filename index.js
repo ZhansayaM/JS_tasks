@@ -1,7 +1,7 @@
 "use strict";
 
 let countBtn = document.getElementById("start");
-countBtn.style.opacity = '1';
+countBtn.style.opacity = "1";
 countBtn.disabled = true;
 
 let plusIncomeBtn = document.getElementsByTagName("button")[0];
@@ -178,12 +178,12 @@ let appData = {
     return appData.budgetMonth * periodSelectRange.value;
   },
 };
-salaryAmount.addEventListener('input', function(){
-    if (salaryAmount.value !== ''){
-        countBtn.disabled = false;
-    } else {
-        countBtn.disabled = true;
-    }
+salaryAmount.addEventListener("input", function () {
+  if (salaryAmount.value !== "") {
+    countBtn.disabled = false;
+  } else {
+    countBtn.disabled = true;
+  }
 });
 countBtn.addEventListener("click", appData.start);
 plusExpenseBtn.addEventListener("click", appData.addExpensesBlock);
