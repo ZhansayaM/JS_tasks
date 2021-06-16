@@ -30,31 +30,33 @@ const render = function () {
     const btnTodoComplete = li.querySelector(".todo-complete");
     btnTodoComplete.addEventListener("click", function () {
       item.completed = !item.completed;
-      render();
+      addLocalStorage();
     });
-    
+
     const btnTodoRemove = li.querySelector(".todo-remove");
     btnTodoRemove.addEventListener("click", function () {
-    //   btnTodoRemove.parentNode.parentNode.remove();
-      console.log('btnTodoRemove.parentNode.parentNode: ', btnTodoRemove.parentNode.parentNode);
-    // li.remove();
+      //   btnTodoRemove.parentNode.parentNode.remove();
+      console.log(
+        "btnTodoRemove.parentNode.parentNode: ",
+        btnTodoRemove.parentNode.parentNode
+      );
+      li.remove();
       render();
     });
   });
-  addLocalStorage();
 };
 
-function addLocalStorage(){
-    localStorage.setItem('data', JSON.stringify(todoData));
-    render();
+function addLocalStorage() {
+  localStorage.setItem("data", JSON.stringify(todoData));
+  render();
 }
 
-function getLocalStorage(){
-    const ref = localStorage.getItem('data');
-    if (ref){
-        todoData = JSON.parse(ref);
-        render();
-    }
+function getLocalStorage() {
+  const ref = localStorage.getItem("data");
+  if (ref) {
+    todoData = JSON.parse(ref);
+    render();
+  }
 }
 
 getLocalStorage();
@@ -67,8 +69,9 @@ todoControl.addEventListener("submit", function (event) {
   };
   if (headerInput.value !== "") {
     todoData.push(newTodo);
+    addLocalStorage();
     headerInput.value = "";
-    render();
+    // render();
   }
 });
 
