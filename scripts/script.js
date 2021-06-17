@@ -10,7 +10,7 @@ let todoData = [];
 const render = function () {
   todoList.textContent = "";
   todoCompleted.textContent = "";
-  todoData.forEach(function (item) {
+  todoData.forEach(function (item, index) {
     const li = document.createElement("li");
     li.classList.add("todo-item");
     li.innerHTML =
@@ -35,13 +35,13 @@ const render = function () {
 
     const btnTodoRemove = li.querySelector(".todo-remove");
     btnTodoRemove.addEventListener("click", function () {
-      //   btnTodoRemove.parentNode.parentNode.remove();
+        todoData.splice(index,1);
+        addLocalStorage();
+        btnTodoRemove.parentNode.parentNode.remove();
       console.log(
         "btnTodoRemove.parentNode.parentNode: ",
         btnTodoRemove.parentNode.parentNode
       );
-      li.remove();
-      render();
     });
   });
 };
@@ -71,7 +71,6 @@ todoControl.addEventListener("submit", function (event) {
     todoData.push(newTodo);
     addLocalStorage();
     headerInput.value = "";
-    // render();
   }
 });
 
