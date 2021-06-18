@@ -25,21 +25,24 @@ let additionalExpensesVal = document.getElementsByClassName(
 let incomePeriodVal = document.getElementsByClassName("income_period-value")[0];
 let targetMonthVal = document.getElementsByClassName("target_month-value")[0];
 
+let incomeItem = document.querySelectorAll(".income-items");
+let expensesItems = document.querySelectorAll(".expenses-items");
+
 let salaryAmount = document.querySelector(".salary-amount");
 let incomeTitle = document.querySelector(".income-title");
 let incomeAmount = document.querySelector(".income-amount");
-let incomeItem = document.querySelectorAll(".income-items");
-let additionalIncomeInput1 = document.querySelector(".additional_income-item");
-let additionalIncomeInput2 = document.querySelector(".additional_income-item");
+let additionalIncomeInput1 = document.querySelectorAll(".additional_income-item")[0];
+let additionalIncomeInput2 = document.querySelectorAll(".additional_income-item")[1];
 let expensesTitle = document.querySelector(".expenses-title");
-let expensesItems = document.querySelectorAll(".expenses-items");
+let expensesAmount = document.querySelector(".expenses-amount");
 let additionalExpensesInput = document.querySelector(
   ".additional_expenses-item"
 );
+let targetAmount = document.querySelector(".target-amount");
+
 let depositCheckboxInput = document.querySelector("#deposit-check");
 let depositAmount = document.querySelector(".deposit-amount");
 let depositPercent = document.querySelector(".deposit-percent");
-let targetAmount = document.querySelector(".target-amount");
 let periodSelectRange = document.querySelector(".period-select");
 let periodAmount = document.querySelector(".period-amount");
 
@@ -69,6 +72,29 @@ let appData = {
     appData.getAddIncome();
     appData.getBudget();
     appData.showResult();
+    console.log(this);
+    appData.hide();
+  },
+  hide: function () {
+    let textInputs = document.querySelectorAll('[type="text"]');
+    textInputs.forEach(function(item){
+      item.disabled = true;
+    });
+    countBtn.textContent = 'Сбросить';
+    countBtn.addEventListener('click', appData.reset);
+  },
+  reset: function(){
+    console.log('reset');
+    let inputs = document.querySelectorAll('input');
+    inputs.forEach(function(item){
+      if (item === periodSelectRange){
+        item.value = 1;
+      } else{
+        item.value = '';
+        item.disabled = false;
+      }
+    })
+
   },
   showResult: function () {
     budgetMonthVal.value = appData.budgetMonth;
@@ -185,9 +211,13 @@ salaryAmount.addEventListener("input", function () {
     countBtn.disabled = true;
   }
 });
-countBtn.addEventListener("click", appData.start);
-plusExpenseBtn.addEventListener("click", appData.addExpensesBlock);
-plusIncomeBtn.addEventListener("click", appData.addIncomeBlock);
+
+countBtn.addEventListener("click", appData.start.bind(appData));
+plusExpenseBtn.addEventListener(
+  "click",
+  appData.addExpensesBlock.bind(appData)
+);
+plusIncomeBtn.addEventListener("click", appData.addIncomeBlock.bind(appData));
 periodSelectRange.addEventListener("input", function () {
   periodAmount.textContent = periodSelectRange.value;
 });
