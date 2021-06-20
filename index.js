@@ -84,17 +84,16 @@ let appData = {
     countBtn.addEventListener('click', this.reset);
   },
   reset: function(){
-    console.log('reset');
     let inputs = document.querySelectorAll('input');
     inputs.forEach(function(item){
       if (item === periodSelectRange){
         item.value = 1;
+        periodAmount.textContent = '1';
       } else{
         item.value = '';
         item.disabled = false;
       }
     })
-
   },
   showResult: function () {
     budgetMonthVal.value = this.budgetMonth;
@@ -105,7 +104,7 @@ let appData = {
     targetMonthVal.value = this.getTargetMonth();
     incomePeriodVal.value = this.calcPeriod();
     periodSelectRange.addEventListener("input", function () {
-      incomePeriodVal.value = this.calcPeriod();
+      incomePeriodVal.value = appData.calcPeriod();
     });
   },
   addExpensesBlock: function () {
